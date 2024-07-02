@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="DELETE">
+        <before>false</before>
+        <description/>
+        <name>Update LNRs from Global</name>
+        <record_for_rollback>true</record_for_rollback>
+        <script><![CDATA[/*  
+Run this script from Global scope both BEFORE _and_ AFTER 
+checking "Can update" from the Loaner Request Table's Application Access section.
+*/
+
+// This method _should_ address occasional instance "bad behavior" during this demo.
+gs.invalidateCache();
+
+// Look up open LNR records
+var loanerRecs = new GlideRecord('x_cdltd_loaner_req_loaner_request');
+loanerRecs.addQuery('state','!=',3); // not Closed Complete
+loanerRecs.setLimit(3); // let's not get carried away...
+loanerRecs.query();
+
+// We're in Global scope — in other words, "out of scope." Can we close the LNR records?
+while(loanerRecs.next()){
+	loanerRecs.setValue('state',3); // mark Closed Complete
+	loanerRecs.update(); // save the records
+}
+
+// No dice closing them out? Try checking the "Can update" box on the Loaner Table, then try again!]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-07-02 01:09:59</sys_created_on>
+        <sys_id>2b17428f9f0302107f4494023524abdc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Update LNRs from Global</sys_name>
+        <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">48be32099f0302107f4494023524abf9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">48be32099f0302107f4494023524abf9</sys_scope>
+        <sys_update_name>sys_script_fix_2b17428f9f0302107f4494023524abdc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-07-02 01:09:59</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Loaner Request">48be32099f0302107f4494023524abf9</application>
+        <file_path/>
+        <instance_id>4e79c8e783764e147fdd78426daad36f</instance_id>
+        <instance_name>nowlearning-nlinst01821165-0001</instance_name>
+        <name>sys_script_fix_2b17428f9f0302107f4494023524abdc</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_fix"&gt;&lt;sys_script_fix action="INSERT_OR_UPDATE"&gt;&lt;before&gt;false&lt;/before&gt;&lt;description/&gt;&lt;name&gt;Update LNRs from Global&lt;/name&gt;&lt;record_for_rollback&gt;true&lt;/record_for_rollback&gt;&lt;script&gt;&lt;![CDATA[/*  
+Run this script from Global scope both BEFORE _and_ AFTER 
+checking "Can update" from the Loaner Request Table's Application Access section.
+*/
+
+// This method _should_ address occasional instance "bad behavior" during this demo.
+gs.invalidateCache();
+
+// Look up open LNR records
+var loanerRecs = new GlideRecord('x_cdltd_loaner_req_loaner_request');
+loanerRecs.addQuery('state','!=',3); // not Closed Complete
+loanerRecs.setLimit(3); // let's not get carried away...
+loanerRecs.query();
+
+// We're in Global scope — in other words, "out of scope." Can we close the LNR records?
+while(loanerRecs.next()){
+	loanerRecs.setValue('state',3); // mark Closed Complete
+	loanerRecs.update(); // save the records
+}
+
+// No dice closing them out? Try checking the "Can update" box on the Loaner Table, then try again!]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_fix&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2024-07-02 01:09:59&lt;/sys_created_on&gt;&lt;sys_id&gt;2b17428f9f0302107f4494023524abdc&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Update LNRs from Global&lt;/sys_name&gt;&lt;sys_package display_value="Loaner Request" source="x_cdltd_loaner_req"&gt;48be32099f0302107f4494023524abf9&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Loaner Request"&gt;48be32099f0302107f4494023524abf9&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_fix_2b17428f9f0302107f4494023524abdc&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2024-07-02 01:09:59&lt;/sys_updated_on&gt;&lt;unloadable&gt;false&lt;/unloadable&gt;&lt;/sys_script_fix&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1018210331</payload_hash>
+        <record_name>Update LNRs from Global</record_name>
+        <reverted_from/>
+        <source>5ba141ad9f4302107f4494023524ab43</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-07-02 01:10:00</sys_created_on>
+        <sys_id>9e87c68f9f0302107f4494023524ab20</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>19070fdcec00000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-07-02 01:10:00</sys_updated_on>
+        <type>Fix Script</type>
+        <update_guid>d287c68fe8030210ae874a38a6237e20</update_guid>
+        <update_guid_history>d287c68fe8030210ae874a38a6237e20:-1018210331</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-07-02 01:11:07</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_fix">sys_script_fix</sys_db_object>
+        <sys_id>057cd0ddf6694f4e84607c83eeb28b81</sys_id>
+        <sys_metadata>2b17428f9f0302107f4494023524abdc</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Update LNRs from Global</sys_name>
+        <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">48be32099f0302107f4494023524abf9</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">48be32099f0302107f4494023524abf9</sys_scope>
+        <sys_scope_delete display_value="">03acaa01b7c64b6785f166aed1991a09</sys_scope_delete>
+        <sys_update_name>sys_script_fix_2b17428f9f0302107f4494023524abdc</sys_update_name>
+        <sys_update_version display_value="sys_script_fix_2b17428f9f0302107f4494023524abdc">9e87c68f9f0302107f4494023524ab20</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-07-02 01:11:07</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
